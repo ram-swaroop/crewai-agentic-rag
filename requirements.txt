@@ -8,3 +8,5 @@ python-dotenv
 langchain_huggingface
 sentence-transformers
 google-generativeai
+pytest
+langchain-tavily
