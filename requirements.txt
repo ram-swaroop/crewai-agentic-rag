@@ -1,0 +1,10 @@
+crewai
+langchain
+# langchain-google-genai
+# langchain-community
+crewai-tools
+tavily-python
+python-dotenv
+langchain_huggingface
+sentence-transformers
+google-generativeai
