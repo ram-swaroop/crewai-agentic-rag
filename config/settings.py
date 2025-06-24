@@ -47,3 +47,6 @@ EMBEDDER_CONFIG = {
         **({"api_key": HF_API_KEY} if HF_API_KEY else {})
     }
 }
+
+print("HF API Key:", HF_API_KEY)
+print("TAVILY API Key:", os.getenv("TAVILY_API_KEY", "Not Set"))
