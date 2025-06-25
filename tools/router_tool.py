@@ -13,7 +13,11 @@ def router_tool(question: str) -> str:
     #     return "pdf_search"
     # return "web_search"
 
-    if 'dspy' in question.lower():
+    # 1. PDF-specific keywords
+    pdf_keywords = ['dspy', 'rag', 'architecture', 'framework', 'pipeline', 'module', 'agentic', 'embedding']
+    if any(keyword in question.lower() for keyword in pdf_keywords):
         return 'vectorstore'
+    # if 'dspy' in question.lower():
+    #     return 'vectorstore'
     return 'websearch'
 
