@@ -1,6 +1,7 @@
 from crewai import Task
 from agents.hallucination_grader import hallucination_grader
 from tasks.grader_task import grader_task
+from tasks.retriever_task import retriever_task
 
 hallucination_task = Task(
     description=(
@@ -9,5 +10,5 @@ hallucination_task = Task(
     ),
     expected_output="'yes' or 'no'",
     agent=hallucination_grader,
-    context=[grader_task],
+    context=[retriever_task, grader_task],
 )

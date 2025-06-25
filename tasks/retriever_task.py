@@ -4,12 +4,14 @@ from tasks.router_task import router_task
 
 retriever_task = Task(
     description=(
-        "Based on the output from router_task, retrieve information for the question {question}. "
-        "Use 'web_search_tool' if the router output is 'websearch'. "
-        "Use 'rag_tool' if the output is 'vectorstore'. "
-        "Provide a clear and concise response."
+        "You are an information retrieval specialist. You will receive the routing decision "
+        "from the previous task along with the original question: '{question}'\n\n"
+        "Based on the routing decision from the router task:\n"
+        "- If the decision was 'vectorstore': Use rag_tool to search documents\n"
+        "- If the decision was 'websearch': Use web_search_tool to search current web information\n\n"
+        "Provide a comprehensive answer to the user's question based on the retrieved information."
     ),
-    expected_output="Relevant information retrieved from either vectorstore or web search.",
+    expected_output="A comprehensive answer to the user's question based on the retrieved information",
     agent=Retriever_Agent,
-    context=[router_task],
+    context=[router_task]  # This task depends on router_task output
 )
