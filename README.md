@@ -60,7 +60,7 @@ crewai-agentic-rag/
 - **Answer Verification Pipeline**: Includes relevance grading and hallucination detection.
 - **LLMs Used**:
   - Qwen2.5:3B via Ollama (using Local CPU)
-  - Gemini 1.5 Flash (via LangChain)
+  - Gemini 2.0 Flash (via LangChain)
 
 ---
 
