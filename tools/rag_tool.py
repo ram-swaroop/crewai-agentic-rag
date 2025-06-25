@@ -1,23 +1,32 @@
-from crewai_tools import PDFSearchTool
-from config.settings import llm
+# tools/rag_tool.py
 import os
+from dotenv import load_dotenv
+from crewai.tools import tool
+from crewai_tools import PDFSearchTool
 
-# from dotenv import load_dotenv
-# load_dotenv()
+load_dotenv()
 
-rag_tool = PDFSearchTool(
-    pdf="knowledge\dspy.pdf",
+# Initialize the PDFSearchTool (no llm=… object passed)
+pdf_search = PDFSearchTool(
+    pdf="knowledge/dspy.pdf",
     config=dict(
-        # llm={"google": "crewai", "config": {}},  # Not used internally here
         llm=dict(
             provider=os.getenv("LLM_PROVIDER", "google"),
-            config=dict(
-                model=os.getenv("LLM_MODEL", "gemini-2.0-flash")
-            )),
+            config=dict(model=os.getenv("LLM_MODEL", "gemini-2.0-flash")),
+        ),
         embedder=dict(
             provider="huggingface",
-            config={"model": "BAAI/bge-small-en-v1.5"},
+            config={
+                "model": os.getenv("EMBEDDER_MODEL", "BAAI/bge-small-en-v1.5"),
+                **({"api_key": os.getenv("HUGGINGFACE_API_KEY")} if os.getenv("HUGGINGFACE_API_KEY") else {})
+            },
         ),
-    ),    
-    llm=llm # pass your configured CrewAI Gemini LLM object
+    )
 )
+
+@tool("rag_tool")
+def rag_tool(question: str) -> str:
+    """
+    Search the PDF (dspy.pdf) and return the most relevant excerpt or summary for the question.
+    """
+    return pdf_search.run(question)
