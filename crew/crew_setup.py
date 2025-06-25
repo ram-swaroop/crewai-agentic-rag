@@ -27,5 +27,6 @@ rag_crew = Crew(
         hallucination_task,
         answer_task
     ],
-    verbose=True
+    verbose=True,
+    # planning=True,  # Enable planning feature
 )
