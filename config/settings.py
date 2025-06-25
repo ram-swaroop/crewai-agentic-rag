@@ -19,6 +19,13 @@ if LLM_PROVIDER == "ollama":
     # "Meet Kona! She is 3 years old and is a black german shepherd."
     # )
     # print(response)
+
+    # Test the LLM connection
+    try:
+        response = llm.call("Test message: respond with 'OK'")
+        print(f"LLM Test Response: {response}")
+    except Exception as e:
+        print(f"LLM Connection Error: {e}")
 elif LLM_PROVIDER == "google":
     gemini_model = os.getenv("LLM_MODEL", "gemini-2.0-flash")
     llm = LLM(
@@ -48,5 +55,5 @@ EMBEDDER_CONFIG = {
     }
 }
 
-print("HF API Key:", HF_API_KEY)
-print("TAVILY API Key:", os.getenv("TAVILY_API_KEY", "Not Set"))
+# print("HF API Key:", HF_API_KEY)
+# print("TAVILY API Key:", os.getenv("TAVILY_API_KEY", "Not Set"))

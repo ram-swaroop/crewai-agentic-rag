@@ -1,13 +1,15 @@
-from tools.router_tool import router_tool
+# from tools.router_tool import router_tool
 from agents.router_agent import Router_Agent
 from crewai import Task
 
 router_task = Task(
     description=(
-        "Analyse the keywords in the question {question} and decide the route."
-        "Return either 'vectorstore' or 'websearch'."
+        "Analyze the user question: '{question}'\n"
+        "Use the router_tool to determine the best information source.\n"
+        "Return ONLY the routing decision as a single word."
     ),
-    expected_output="Either 'vectorstore' or 'websearch'",
+    expected_output="A single word: either 'vectorstore' or 'websearch'",
     agent=Router_Agent,
-    tools=[router_tool],
+    output_direct=True
+    # tools=[router_tool],
 )

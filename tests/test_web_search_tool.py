@@ -13,6 +13,7 @@ def test_web_search_tool():
 
     # Run the web search tool with a sample query
     response = web_search_tool.run("who won recent ind vs eng test match")
-    # print(response)
+    print(response)
 
     assert isinstance(response, (str, dict)), "Unexpected response type"
+    # assert isinstance(response, (int, float)), "Unexpected response type"
